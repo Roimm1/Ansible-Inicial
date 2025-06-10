@@ -1,0 +1,13 @@
+- hosts: prueba
+#no obtenemos informacion de los clientes
+  gather_facts: no
+  become: yes
+  tasks:
+  - name: Install Software
+    apt:
+       name:
+         - figlet
+         - tree
+         - rdiff-backup
+       state: latest
+       update_cache: true

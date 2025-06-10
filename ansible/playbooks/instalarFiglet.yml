@@ -1,0 +1,8 @@
+- hosts: prueba
+  become: yes
+  tasks:
+  - name: Install figlet
+    apt:
+          name: figlet
+          state: latest
+          update_cache: true
