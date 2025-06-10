@@ -1,13 +1,29 @@
+---
 - hosts: prueba
-#no obtenemos informacion de los clientes
+  # no obtenemos información de los clientes
   gather_facts: no
   become: yes
+
   tasks:
-  - name: Install Software
-    apt:
-       name:
-         - figlet
-         - tree
-         - rdiff-backup
-       state: latest
-       update_cache: true
+    - name: "Mensaje inicial"
+      ansible.builtin.debug:
+        msg: "Iniciando playbook"
+
+    - name: "Crear un directorio"
+      ansible.builtin.file:
+        path: "/tmp/prueba"
+        state: directory
+      register: dir_result  # Registra el resultado en una variable
+
+    - name: "Mostrar resultado de la creación del directorio"
+      ansible.builtin.debug:
+        var: dir_result  # Imprime la variable con el resultado
+
+    - name: "Install Software"
+      ansible.builtin.apt:
+        name:
+          - figlet
+          - tree
+          - rdiff-backup
+        state: latest
+        update_cache: yes
